@@ -1,7 +1,7 @@
 #include <iostream>
-#include <ranges>
 #include <chrono>
 #include <conio.h>
+#include <thread>
 #include "selector.h"
 
 Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message) {
@@ -16,6 +16,27 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 	}
 	this->message = message;
 	nextIsMenu = true;
+
+	int maxLen = 0;
+	for (auto& s : options) {
+		if (s.first.length() > maxLen)
+			maxLen = s.first.length();
+	}
+	lineEnd = std::string(maxLen, ' ');
+	lineEnd.push_back('\r');
+}
+Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message) {
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, WHITE);
+
+	this->options.reserve(options.size());
+	this->optionsMenus.reserve(options.size());
+	for (auto& op : options) {
+		this->options.push_back(op.first);
+		this->optionsMenus.push_back(op.second);
+	}
+	this->message = message;
+	nextIsMenu = false;
 
 	int maxLen = 0;
 	for (auto& s : options) {

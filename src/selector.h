@@ -9,6 +9,7 @@ public:
 
 public:
 	Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message);
+	Selector(std::vector<std::pair<std::string, void(*)()>>& options, std::string message);
 
 	void execute();
 	void updateOptions(std::vector<std::pair<std::string, void(*)()>>& options, std::string message);
