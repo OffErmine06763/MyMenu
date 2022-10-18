@@ -35,7 +35,7 @@ private:
 private:
 	HANDLE hConsole;
 	static constexpr uint8_t RED = 12, GREEN = 10, WHITE = 7;
-	static constexpr int DOWN = 80, UP = 72, ARROW = 224;
+	static constexpr int DOWN = 80, UP = 72, ARROW = 224, ENTER = 13;
 	int pos = 0;
 	bool running = true, nextIsMenu = true;
 	std::string lineEnd, title;

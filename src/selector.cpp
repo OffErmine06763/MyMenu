@@ -118,7 +118,7 @@ void Selector::execute() {
 			else if (input == 'S' || input == 's') {
 				moveDown();
 			}
-			else if (input == 13) {
+			else if (input == ENTER) {
 				SetConsoleTextAttribute(hConsole, WHITE);
 				executeSelection();
 			}
