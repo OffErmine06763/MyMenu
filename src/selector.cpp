@@ -4,7 +4,7 @@
 #include <thread>
 #include "selector.h"
 
-Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message) {
+Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string title) {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, WHITE);
 
@@ -14,7 +14,7 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 		this->options.push_back(op.first);
 		this->optionsMenus.push_back(op.second);
 	}
-	this->message = message;
+	this->title = title;
 	nextIsMenu = true;
 
 	int maxLen = 0;
@@ -25,7 +25,7 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 	lineEnd = std::string(maxLen, ' ');
 	lineEnd.push_back('\r');
 }
-Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message) {
+Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string title) {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, WHITE);
 
@@ -35,7 +35,7 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 		this->options.push_back(op.first);
 		this->optionsMenus.push_back(op.second);
 	}
-	this->message = message;
+	this->title = title;
 	nextIsMenu = false;
 
 	int maxLen = 0;
@@ -47,7 +47,7 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 	lineEnd.push_back('\r');
 }
 
-void Selector::updateOptions(std::vector<std::pair<std::string, void(*)()>>& options, std::string message) {
+void Selector::updateOptions(std::vector<std::pair<std::string, void(*)()>>& options, std::string title) {
 	this->options.clear();
 	this->optionsFns.clear();
 	this->optionsMenus.clear();
@@ -57,7 +57,7 @@ void Selector::updateOptions(std::vector<std::pair<std::string, void(*)()>>& opt
 		this->options.push_back(op.first);
 		this->optionsFns.push_back(op.second);
 	}
-	this->message = message;
+	this->title = title;
 	nextIsMenu = false;
 
 	int maxLen = 0;
@@ -68,10 +68,10 @@ void Selector::updateOptions(std::vector<std::pair<std::string, void(*)()>>& opt
 	lineEnd = std::string(maxLen, ' ');
 	lineEnd.push_back('\r');
 	running = true;
-	std::cout << message << '\n';
+	std::cout << title << '\n';
 	printSets();
 }
-void Selector::updateOptions(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message) {
+void Selector::updateOptions(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string title) {
 	this->options.clear();
 	this->optionsFns.clear();
 	this->optionsMenus.clear();
@@ -81,7 +81,7 @@ void Selector::updateOptions(std::vector<std::pair<std::string, void(*)(Selector
 		this->options.push_back(op.first);
 		this->optionsMenus.push_back(op.second);
 	}
-	this->message = message;
+	this->title = title;
 	nextIsMenu = true;
 
 	int maxLen = 0;
@@ -92,13 +92,13 @@ void Selector::updateOptions(std::vector<std::pair<std::string, void(*)(Selector
 	lineEnd = std::string(maxLen, ' ');
 	lineEnd.push_back('\r');
 	running = true;
-	std::cout << message << '\n';
+	std::cout << title << '\n';
 	printSets();
 }
 
 
 void Selector::execute() {
-	std::cout << message << '\n';
+	std::cout << title << '\n';
 	printSets();
 
 	while (running) {

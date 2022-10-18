@@ -5,15 +5,22 @@
 
 class Selector {
 public:
-	using options_t = std::vector<std::pair<std::string, void(*)(Selector&)>>;
-
-public:
-	Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message);
-	Selector(std::vector<std::pair<std::string, void(*)()>>& options, std::string message);
+	/// <summary>
+	/// Create menu that expects submenues
+	/// </summary>
+	/// <param name="options">Pairs of option title and a function that expects the current menu passed as parameter to update it</param>
+	/// <param name="title">Menu title</param>
+	Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string title);
+	/// <summary>
+	/// Create menu that runs function on selection
+	/// </summary>
+	/// <param name="options">Pairs of option title and a function to execute on ENTER pressed</param>
+	/// <param name="title">Menu title</param>
+	Selector(std::vector<std::pair<std::string, void(*)()>>& options, std::string title);
 
 	void execute();
-	void updateOptions(std::vector<std::pair<std::string, void(*)()>>& options, std::string message);
-	void updateOptions(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string message);
+	void updateOptions(std::vector<std::pair<std::string, void(*)()>>& options, std::string title);
+	void updateOptions(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string title);
 
 private:
 	void moveDown(bool force = false);
@@ -31,7 +38,7 @@ private:
 	static constexpr int DOWN = 80, UP = 72, ARROW = 224;
 	int pos = 0;
 	bool running = true, nextIsMenu = true;
-	std::string lineEnd, message;
+	std::string lineEnd, title;
 	std::vector<std::string> options;
 	std::vector<void(*)(Selector&)> optionsMenus;
 	std::vector<void(*)()> optionsFns;
