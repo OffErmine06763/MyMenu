@@ -4,7 +4,7 @@ Usage:
 
 TO EXECUTE ACTION:
 
-	std::vector<std::pair<std::string, void (\*)()>> options = {
+	std::vector<std::pair<std::string, void (*)()>> options = {
 		{"Option A", functionA},
 		{"Option B", functionB},
 		{"Option C", functionC},
@@ -18,7 +18,7 @@ TO EXECUTE ACTION:
 
 TO MOVE TO ANOTHER MENU:
   
-	std::vector<std::pair<std::string, void (\*)(Selector&)>> options = {
+	std::vector<std::pair<std::string, void (*)(Selector&)>> options = {
 		{"Option A", functionA},
 		{"Option B", functionB},
 		{"Option C", functionC},
