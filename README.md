@@ -12,9 +12,11 @@ TO EXECUTE ACTION:
 
 	(Selector(options, "Title")).execute();
 
-  where funcionA, B and C have the following signature:
-    void functionA();
-  that will be called by the menu on ENTER pressed.
+where funcionA, B and C have the following signature:
+
+	void functionA();
+
+that will be called by the menu on ENTER pressed.
 
 TO MOVE TO ANOTHER MENU:
   
@@ -26,10 +28,12 @@ TO MOVE TO ANOTHER MENU:
 
 	(Selector(options, "Title")).execute();
   
-  where funtionA, B and C have the following signature:
-    void functionA(Selector& selector);
-  that will be called by the menu on ENTER pressed and pass itself.
-  See UPDATE MENU section.
+where funtionA, B and C have the following signature:
+
+	void functionA(Selector& selector);
+  
+that will be called by the menu on ENTER pressed and pass itself.
+See UPDATE MENU section.
 
 TO UPDATE MENU:
 	
