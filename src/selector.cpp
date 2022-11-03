@@ -25,7 +25,7 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 	lineEnd = std::string(maxLen, ' ');
 	lineEnd.push_back('\r');
 }
-Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& options, std::string title) {
+Selector::Selector(std::vector<std::pair<std::string, void(*)()>>& options, std::string title) {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, WHITE);
 
@@ -33,7 +33,7 @@ Selector::Selector(std::vector<std::pair<std::string, void(*)(Selector&)>>& opti
 	this->optionsMenus.reserve(options.size());
 	for (auto& op : options) {
 		this->options.push_back(op.first);
-		this->optionsMenus.push_back(op.second);
+		this->optionsFns.push_back(op.second);
 	}
 	this->title = title;
 	nextIsMenu = false;
